@@ -3,6 +3,7 @@
 #include <boost/program_options.hpp>
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -171,8 +172,8 @@ int main(int argc, char** argv)
             cv::Mat sketch;
             chessboard.getSketch().copyTo(sketch);
 
-            cv::imshow("Image", sketch);
-            cv::waitKey(50);
+            // cv::imshow("Image", sketch);
+            // cv::waitKey(50);
         }
         else if (verbose)
         {
@@ -180,7 +181,7 @@ int main(int argc, char** argv)
         }
         chessboardFound.at(i) = chessboard.cornersFound();
     }
-    cv::destroyWindow("Image");
+    // cv::destroyWindow("Image");
 
     if (calibration.sampleCount() < 10)
     {
@@ -235,8 +236,8 @@ int main(int argc, char** argv)
             cv::putText(cbImages.at(i), cbImageFilenames.at(i), cv::Point(10,20),
                         cv::FONT_HERSHEY_COMPLEX, 0.5, cv::Scalar(255, 255, 255),
                         1, CV_AA);
-            cv::imshow("Image", cbImages.at(i));
-            cv::waitKey(0);
+            cv::imwrite(std::string{"/intrinsic_calib_output/calib_image" + std::to_string(i) + ".png"}, cbImages.at(i));
+            // cv::waitKey(0);
         }
     }
 
